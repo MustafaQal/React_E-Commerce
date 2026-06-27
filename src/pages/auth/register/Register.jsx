@@ -1,33 +1,23 @@
 import { Box, TextField, Typography, Button } from '@mui/material'
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
+import registerSchema from '../../../components/Validation/registerSchema';
 
 export default function Register() {
 
-  let registerSchema = yup.object({
-    fullName: yup.string().required("Full name is required"),
-    email: yup.string().email("Invalid email").required("Email is required"),
-    userName: yup.string().required("Username is required"),
-    password: yup.string().required("Password is required").min(8, "Password must be at least 8 characters")
-      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .matches(/[0-9]/, "Password must contain at least one number")
-      .matches(/[!@#$%^&*]/, "Password must contain at least one special character"),
-    phoneNumber: yup.string().required("Phone number is required")
-      .matches(/^\d+$/, "Phone number must contain only digits")
-  });
-
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerSchema) });
+  const [serverErr, setServerErr] = useState([]);
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerSchema), mode: 'onBlur' });
   const registerForm = async (values) => {
     //console.log(value);
     try {
       const response = await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/Register', values);
       console.log(response.data);
     } catch (error) {
-      console.log(error.response?.data);
+      setServerErr(error.response.data.errors);
+      console.log(error.response.data.errors);
     }
   }
 
@@ -41,6 +31,12 @@ export default function Register() {
         onSubmit={handleSubmit(registerForm)}
       >
 
+        {serverErr.length > 0 && (
+          <Box sx={{ width: "100%", bgcolor: "#f5bac3", color: "error.main", p: 2, borderRadius: 1, mb: 2}}> 
+            {serverErr.map((err)=><Typography> {err} </Typography>) }
+          </Box>
+        )}
+
         <TextField {...register("fullName")} fullWidth label="Full Name" variant="outlined"
           error={errors.fullName}
           helperText={errors.fullName?.message}
@@ -53,7 +49,7 @@ export default function Register() {
           error={errors.userName}
           helperText={errors.userName?.message}
         />
-        <TextField  type="password" {...register("password")} fullWidth label="Password" variant="outlined"
+        <TextField type="password" {...register("password")} fullWidth label="Password" variant="outlined"
           error={errors.password}
           helperText={errors.password?.message}
         />
