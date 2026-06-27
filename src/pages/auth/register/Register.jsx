@@ -1,4 +1,4 @@
-import { Box, TextField, Typography, Button } from '@mui/material'
+import { Box, TextField, Typography, Button, CircularProgress } from '@mui/material'
 import axios from 'axios';
 import React, { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,7 +9,7 @@ import registerSchema from '../../../components/Validation/registerSchema';
 export default function Register() {
 
   const [serverErr, setServerErr] = useState([]);
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(registerSchema), mode: 'onBlur' });
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: yupResolver(registerSchema), mode: 'onBlur' });
   const registerForm = async (values) => {
     //console.log(value);
     try {
@@ -32,33 +32,30 @@ export default function Register() {
       >
 
         {serverErr.length > 0 && (
-          <Box sx={{ width: "100%", bgcolor: "#f5bac3", color: "error.main", p: 2, borderRadius: 1, mb: 2}}> 
-            {serverErr.map((err)=><Typography> {err} </Typography>) }
+          <Box sx={{ width: "100%", bgcolor: "#f5bac3", color: "error.main", p: 2, borderRadius: 1, mb: 2 }}>
+            {serverErr.map((err) => <Typography> {err} </Typography>)}
           </Box>
         )}
 
         <TextField {...register("fullName")} fullWidth label="Full Name" variant="outlined"
-          error={errors.fullName}
           helperText={errors.fullName?.message}
         />
         <TextField {...register("email")} fullWidth label="Email" variant="outlined"
-          error={!!errors.email}
           helperText={errors.email?.message}
         />
         <TextField {...register("userName")} fullWidth label="UserName" variant="outlined"
-          error={errors.userName}
           helperText={errors.userName?.message}
         />
         <TextField type="password" {...register("password")} fullWidth label="Password" variant="outlined"
-          error={errors.password}
           helperText={errors.password?.message}
         />
         <TextField {...register("phoneNumber")} fullWidth label="Phone Number" variant="outlined"
-          error={errors.phoneNumber}
           helperText={errors.phoneNumber?.message}
         />
-        <Button variant="contained" sx={{ bgcolor: '#009688' }} type='submit'>Register</Button>
-
+        <Button variant="contained" sx={{ bgcolor: '#009688' }} type='submit' disabled={isSubmitting}
+>
+          {isSubmitting ? (<CircularProgress size={24} color="inherit" /> ) : ("Register")}
+        </Button>
       </Box>
     </Box >
   )
