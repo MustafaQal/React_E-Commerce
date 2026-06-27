@@ -8,7 +8,7 @@ export default function MainLayout() {
     return (
         <div>
             <Navbar />
-            <Container p={5}>
+            <Container>
                 <Outlet />
             </Container>
             <Footer />
