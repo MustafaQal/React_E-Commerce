@@ -2,26 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Box, Typography, CircularProgress, Alert } from '@mui/material';
 import React from 'react'
 import axios from 'axios'
+import useCategories from '../../hooks/useCategories';
 
 export default function Categories() {
 
-    const getCategories = async () => {
-        const response = await axios.get(`https://knowledgeshop.runasp.net/api/Categories`,
-            {
-                headers: {
-                    "Accept-Language": "en",
-                }
-            }
-    );
-    return response.data;
-}
 
-const { data, isError, isLoading, error } = useQuery({
-    queryKey: ['Category'],
-    queryFn: getCategories,
-    staleTime:1000*6*5
-});
-
+const { data, isError, isLoading, error } = useCategories();
 if (isLoading) return <CircularProgress />;
 if (isError) return <Alert severity="error">{error.message}</Alert>;
 
