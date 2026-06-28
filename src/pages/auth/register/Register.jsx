@@ -57,9 +57,8 @@ export default function Register() {
           error={errors.phoneNumber}
           helperText={errors.phoneNumber?.message}
         />
-        <Button variant="contained" sx={{ bgcolor: '#009688' }} type='submit' disabled={isSubmitting}
->
-          {isSubmitting ? (<CircularProgress size={24} color="inherit" /> ) : ("Register")}
+        <Button variant="contained" sx={{ bgcolor: '#009688' }} type='submit' disabled={isSubmitting}>
+          {isSubmitting? (<CircularProgress size={24} color="inherit"/> ) : ("Register")}
         </Button>
       </Box>
     </Box >
