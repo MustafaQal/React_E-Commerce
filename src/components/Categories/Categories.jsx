@@ -1,58 +1,38 @@
-import { useScrollTrigger } from '@mui/material';
-import axios from 'axios'
+import { useQuery } from '@tanstack/react-query';
+import { Box, Typography, CircularProgress, Alert } from '@mui/material';
 import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react';
-import {
-    Box,
-    Card,
-    CardContent,
-    Typography,
-    Grid,
-    CircularProgress,
-} from "@mui/material";
+import axios from 'axios'
+
 export default function Categories() {
 
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
     const getCategories = async () => {
-        try {
-            setLoading(true);
-            setError("");
-            const response = await axios.get(`https://knowledgeshop.runasp.net/api/Categories`,
-                {
-                    headers: {
-                        "Accept-Language": "en",
-                    }
+        const response = await axios.get(`https://knowledgeshop.runasp.net/api/Categories`,
+            {
+                headers: {
+                    "Accept-Language": "en",
                 }
-            );
-            console.log(response.data);
-            setCategories(response.data.response.data);
-        } catch (err) {
-            
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    useEffect(() => {
-        getCategories();
-    }, [])
-
-if (loading) return <CircularProgress />;
-if (error) return <Alert severity="error">{error}</Alert>;
-if (categories.length === 0) return <Typography>No categories found</Typography>;
-
-    return (
-        <Box sx={{ py: 5, px: 3 }}>
-            <Typography component={'h1'} variant='h2' py={3}> Categories </Typography>
-            
-            {categories.length === 0 ? (<Box> <CircularProgress /> </Box>) :
-                (
-                    <Box>{categories.map((category) => <Box> {category.name} </Box>)} </Box>
-                )
             }
-        </Box>
     );
+    return response.data;
+}
+
+const { data, isError, isLoading, error } = useQuery({
+    queryKey: ['Category'],
+    queryFn: getCategories,
+    staleTime:1000*6*5
+});
+
+if (isLoading) return <CircularProgress />;
+if (isError) return <Alert severity="error">{error.message}</Alert>;
+
+return (
+    <Box sx={{ py: 5, px: 3 }}>
+        <Typography component={'h1'} variant='h2' sx={{ py: 5 }}> Categories </Typography>
+        {data.response.data.length === 0 ? (<Box> <CircularProgress /> </Box>) :
+            (
+                <Box>{data.response.data.map((category) => <Box> {category.name} </Box>)} </Box>
+            )
+        }
+    </Box>
+);
 }
