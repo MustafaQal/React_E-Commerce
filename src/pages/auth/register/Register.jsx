@@ -23,7 +23,7 @@ export default function Register() {
 
   return (
     <Box component={'section'} className='register_form' sx={{ py: 5, pb: 5 }}>
-      <Typography component={'h1'} variant='h1' py={3}> Register </Typography>
+      <Typography component={'h1'} variant='h2' py={3}> Register </Typography>
       <Box component="form" sx={{
         display: 'flex', flexDirection: 'column', gap: 2, py: 5,
         alignItems: 'center'
