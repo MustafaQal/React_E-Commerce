@@ -7,6 +7,7 @@ const authaxiosinstance = axios.create({
   },
 });
 
+{/* Mustafa: https://axios.rest/pages/advanced/interceptors */}
 authaxiosinstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("accessToken");
 

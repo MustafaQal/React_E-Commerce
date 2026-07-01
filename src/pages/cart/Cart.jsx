@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 
 import useCart from "../../hooks/useCart";
+import Children from "../../components/Children/Children";
 
 export default function Cart() {
   const { data, isLoading, isError, error } = useCart();
@@ -13,7 +14,7 @@ export default function Cart() {
   if (isError)
     return <Alert severity="error">{error.message}</Alert>;
   //console.log(data);//Mustafa: items
-
+  const carts1=34;
   return (
     <Box sx={{ py: 5 }}>
       <Typography variant="h2" mb={4}> My Cart </Typography>
@@ -25,6 +26,10 @@ export default function Cart() {
           </Box>
         ))
       )}
+
+      <Children test={carts1}>
+        <h1> This is carts Children </h1>
+      </Children>
     </Box>
   );
 }
