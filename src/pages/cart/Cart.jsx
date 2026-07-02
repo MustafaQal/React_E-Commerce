@@ -9,6 +9,7 @@ import {
 import useCart from "../../hooks/useCart";
 import Children from "../../components/Children/Children";
 import { useCounterStore } from "../../Store/useCounterStore";
+import CartBadge from "../../components/BadgeIcon/BadgeIcon";
 
 export default function Cart() {
   const { data, isLoading, isError, error } = useCart();
@@ -32,6 +33,9 @@ export default function Cart() {
       <Typography variant="h2" mb={4}> My Cart </Typography>
       {/* Mustafa: test Zustand */}
       <h2>Zustand test: {counter} </h2>
+
+      <CartBadge > Zustand Badge: {counter}</CartBadge>
+
       <Button variant="contained" onClick={increment} sx={{ mr: 2 }} >
         +
       </Button>
