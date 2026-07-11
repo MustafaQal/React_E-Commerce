@@ -2,6 +2,8 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 import Categories from '../../components/Categories/Categories'
 import Children from '../../components/Children/Children'
+import { Carousel } from '@/components/ui/carousel';
+import Products from '@/components/Products/Products';
 
 export default function Home() {
   const probs = 33;
@@ -9,6 +11,9 @@ export default function Home() {
     <div>
       <Categories />
 
+      <Products />
+      
+      <Carousel bg-blue-200 />
       <Children test={probs}>
         <Box>
           <h2> This is Home Children </h2>
