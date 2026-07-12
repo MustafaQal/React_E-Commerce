@@ -12,8 +12,8 @@ export default function Home() {
       <Categories />
 
       <Products />
-      
-      <Carousel bg-blue-200 />
+
+      <Carousel />
       <Children test={probs}>
         <Box>
           <h2> This is Home Children </h2>

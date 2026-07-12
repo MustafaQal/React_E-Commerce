@@ -4,6 +4,7 @@ import { Box, CardContent, CardMedia, Grid, Rating, Typography, CardActions, But
 import React from 'react'
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import StarIcon from "@mui/icons-material/Star";
+import { Link } from 'react-router-dom';
 
 export default function Products() {
 
@@ -21,6 +22,7 @@ export default function Products() {
                 <Grid container spacing={4}>
                     {data.map((product) => (
                         <Grid item size={{ xs: 12, sm: 6, md: 3 }} key={product.id} sx={{ py: 4 }}>
+                            <Link to={`/products/${product.id}`}>
                             <Card sx={{borderRadius: 3, height: "100%", transition: "0.5s", "&:hover": {boxShadow: 8,}}}>
 
                                 <CardMedia component={'img'} image={product.image} alt={product.name} height="220" >
@@ -38,6 +40,8 @@ export default function Products() {
 
                             </Card>
 
+                            
+                            </Link>
 
                         </Grid>
                     ))}
