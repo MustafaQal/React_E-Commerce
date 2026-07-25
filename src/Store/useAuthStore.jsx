@@ -8,7 +8,13 @@ const useAuthStore = create((set)=> ({
       token:newToken
     });
     localStorage.setItem("accessToken", newToken); 
+  },
+  logout: ()=>{
+    set({
+      token:null
+    });
+    localStorage.removeItem("accessToken");
   }
-})) 
+})); 
 
 export default useAuthStore;

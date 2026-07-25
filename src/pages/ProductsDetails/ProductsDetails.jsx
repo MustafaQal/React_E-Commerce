@@ -1,7 +1,6 @@
 import useProductDetails from '@/hooks/useProductDetails'
 import Loader from '@/UI/Loader/Loader';
-import { Box,
-  Button,
+import { Box, Button,
   Card,
   CardMedia,
   Chip,

@@ -23,6 +23,7 @@ export default function Navbar() {
           <Link component={RouterLink} to={'/cart'} color="inherit" underline='none' >Cart</Link>
           <Link component={RouterLink} to={'/register'} color="inherit" underline='none'>Register</Link>
           <Link component={RouterLink} to={'/login'} color="inherit" underline='none'>Login</Link>
+          <Link component={RouterLink} to={'/logout'} color="inherit" underline='none'>Logout</Link>
           </Box>
 
           <IconButton sx={{display: {xs:'flex', sm:'none'} }} color="inherit">
