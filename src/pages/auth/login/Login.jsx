@@ -5,9 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import loginSchema from '../../../components/Validation/loginSchema';
+import useAuthStore from '../../../Store/useAuthStore';
 
 export default function Login() {
 
+  const setToken = useAuthStore ((state)=>state.setToken);
   const [serverErr, setServerErr] = useState([]);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: yupResolver(loginSchema), mode: 'onBlur' });
   const loginForm = async (values) => {
@@ -16,7 +18,8 @@ export default function Login() {
       const response = await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/Login', values);
       console.log(response.data);
       if(response.status === 200){
-        localStorage.setItem("accessToken", response.data.accessToken)
+        setToken(response.data.accessToken)
+        //localStorage.setItem("accessToken", response.data.accessToken)
       }
     } catch (error) {
       setServerErr(error.response.data.errors);
