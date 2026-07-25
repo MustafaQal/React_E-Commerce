@@ -25,21 +25,9 @@ export default function Logout() {
                 <Card elevation={4} sx={{ width: "100%", maxWidth: 450, borderRadius: 4, }} >
                     <CardContent sx={{ p: 5 }}>
                         <Stack spacing={3} alignItems="center">
-
                             <LogoutIcon sx={{ fontSize: 70, color: "error.main", }} />
-
-                            <Typography
-                                variant="h4"
-                                fontWeight="bold"
-                                textAlign="center"
-                            >
-                                Logout
-                            </Typography>
-
-                            <Typography
-                                color="text.secondary"
-                                textAlign="center"
-                            >
+                            <Typography variant="h4" fontWeight="bold" textAlign="center" > Logout</Typography>
+                            <Typography color="text.secondary" textAlign="center" >
                                 Are you sure you want to logout from your account?
                             </Typography>
 
