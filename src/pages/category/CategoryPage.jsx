@@ -8,9 +8,8 @@ import { Link } from 'react-router-dom';
 import { TextAlignCenter } from 'lucide-react';
 import DisplayCategory from '../../UI/Category/DisplayCategory';
 
-export default function Categories() {
-
-    const { data, isError, isLoading, error } = useCategories(3);
+export default function CategoryPage() {
+    const { data, isError, isLoading, error } = useCategories(10);
     if (isLoading) return <Loader />;
     if (isError) return <Alert severity="error">{error.message}</Alert>;
 
@@ -22,14 +21,14 @@ export default function Categories() {
                     <Grid container spacing={2}>
                         {data.response.data.map((category) =>
                             <Grid item size={{ xs: 12, sm: 4, md: 2 }}>
-                                <DisplayCategory category={category}/>
+                                <DisplayCategory category={category} />
                             </Grid>
                         )}
                     </Grid>
                 )
             }
 
-            <Link to={"./catergory"} component={TextAlignCenter} > Show More </Link>
+            <Link to={"/"} component={TextAlignCenter} > Back </Link>
         </Box>
-    );
+    )
 }

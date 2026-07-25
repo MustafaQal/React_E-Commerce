@@ -11,7 +11,7 @@ export default function useProductDetails(id) {
   return useQuery({
     queryKey: ["product", id],
     queryFn: getPDetails,
-    enabled: !!id, 
+    enabled: !!id, //Mustafa: https://medium.com/dailyjs/2-ways-to-convert-values-to-boolean-in-javascript-2abee60af76d
     staleTime: 1000 * 60 * 10,
   });
 }
