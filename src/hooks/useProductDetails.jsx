@@ -5,13 +5,13 @@ export default function useProductDetails(id) {
   const getPDetails = async () => {
     const response = await authaxiosinstance.get(`/Products/${id}`);
     console.log('HOC',response );
-    return response.data;
+    return response.data.response;
   };
 
   return useQuery({
     queryKey: ["product", id],
     queryFn: getPDetails,
-    enabled: !!id,
+    enabled: !!id, 
     staleTime: 1000 * 60 * 10,
   });
 }
