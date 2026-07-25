@@ -41,7 +41,7 @@ export default function Login() {
               <LoginIcon sx={{ fontSize: 70, color: "success.main", }} />
               <Typography variant='h4' fontWeight="bold" textAlign="center"> Login </Typography>
               <Typography color="text.secondary" textAlign="center">
-                Welcome back! Please login to your account.
+                Welcome back! Please login to your account
               </Typography>
 
 <Box component="form" sx={{width: "100%", py: 2, }}
