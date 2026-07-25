@@ -6,10 +6,12 @@ import * as yup from "yup";
 import { useForm } from 'react-hook-form'
 import loginSchema from '../../../components/Validation/loginSchema';
 import useAuthStore from '../../../Store/useAuthStore';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
   const setToken = useAuthStore ((state)=>state.setToken);
+  const navigate = useNavigate ();
   const [serverErr, setServerErr] = useState([]);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: yupResolver(loginSchema), mode: 'onBlur' });
   const loginForm = async (values) => {
@@ -18,7 +20,8 @@ export default function Login() {
       const response = await axios.post('https://knowledgeshop.runasp.net/api/auth/Account/Login', values);
       console.log(response.data);
       if(response.status === 200){
-        setToken(response.data.accessToken)
+        setToken(response.data.accessToken);
+        navigate('/')
         //localStorage.setItem("accessToken", response.data.accessToken)
       }
     } catch (error) {
