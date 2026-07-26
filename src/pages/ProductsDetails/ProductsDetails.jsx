@@ -1,14 +1,6 @@
 import useProductDetails from '@/hooks/useProductDetails'
 import Loader from '@/UI/Loader/Loader';
-import { Box, Button,
-  Card,
-  CardMedia,
-  Chip,
-  Divider,
-  Grid,
-  Rating,
-  Stack,
-  Typography, Link} from '@mui/material';
+import { Box, Button, Card, CardMedia, Chip, Divider, Grid, Rating, Stack, Typography, Link} from '@mui/material';
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import React from 'react'
 import { useParams } from 'react-router-dom';
