@@ -6,6 +6,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import React, { useRef, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { green } from '@mui/material/colors';
+import useAddToCart from '../../hooks/useAddToCart';
 
 export default function ProductsDetails() {
 
@@ -14,6 +15,8 @@ export default function ProductsDetails() {
   const [showAllRev, setShowAllRev] = useState(false);
   const { data, isLoading, isError } = useProductDetails(id);
   console.log("Data", data);
+
+  const {mutate, isPending} = useAddToCart();
 
   if (isLoading) return <Loader />;
   if (isError) return <Typography>Error loading products </Typography>;
@@ -64,8 +67,12 @@ export default function ProductsDetails() {
             {data.description}
           </Typography>
 
-          <Button variant="contained" sx={{ bgcolor: '#009688', width: 220 }} startIcon={<ShoppingCartOutlinedIcon />} >
-            Add to Cart
+          <Button disabled={isPending} variant="contained" sx={{ bgcolor: '#009688', width: 220 }} startIcon={<ShoppingCartOutlinedIcon />} 
+          onClick={ ()=> mutate ({
+            ProductId: data.id,
+            Count: 1,
+          }) }>
+             Add to Cart
           </Button>
         </Stack>
       </Grid>

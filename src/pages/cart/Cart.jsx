@@ -31,7 +31,7 @@ export default function Cart() {
   if (isLoading) return <CircularProgress />;
   if (isError)
     return <Alert severity="error">{error.message}</Alert>;
-  //console.log(data);//Mustafa: items
+  console.log(data);//Mustafa: items
 
 
   return (
